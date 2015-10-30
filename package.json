@@ -1,7 +1,7 @@
 {
   "name": "unset-value",
   "description": "Delete nested properties from an object using dot notation.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/jonschlinkert/unset-value",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/unset-value",
@@ -20,16 +20,16 @@
     "test": "mocha"
   },
   "dependencies": {
-    "has-value": "^0.2.0",
+    "has-value": "^0.2.1",
     "isobject": "^2.0.0"
   },
   "devDependencies": {
     "mocha": "*",
     "should": "*"
   },
-  "keywords": [],
   "verb": {
     "related": {
+      "description": "",
       "list": [
         "get-value",
         "get-values",
@@ -40,5 +40,17 @@
         "upsert-value"
       ]
     }
-  }
+  },
+  "keywords": [
+    "del",
+    "delete",
+    "key",
+    "object",
+    "omit",
+    "prop",
+    "property",
+    "remove",
+    "unset",
+    "value"
+  ]
 }
