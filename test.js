@@ -41,6 +41,26 @@ describe('unset', function () {
     three.should.eql({a: {b: {e: 'f'}}});
   });
 
+  it('should delete...:', function () {
+    var three = {'a.b': 'c', d: 'e'};
+    unset(three, 'a.b');
+    three.should.eql({d: 'e'});
+  });
+
+  it('should delete nested escaped values:', function () {
+    var one = {a: {'b.c': 'd'}};
+    unset(one, 'a.b\\.c');
+    one.should.eql({a: {}});
+
+    var two = {'a.b.c': 'd'};
+    unset(two, 'a\\.b\\.c');
+    two.should.eql({});
+
+    var three = {'a.b': 'c', d: 'e'};
+    unset(three, 'a\\.b');
+    three.should.eql({d: 'e'});
+  });
+
   it('should throw an error when invalid args are passed:', function () {
     (function () {
       unset();
