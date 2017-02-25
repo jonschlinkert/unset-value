@@ -28,6 +28,7 @@
     "isobject": "^3.0.0"
   },
   "devDependencies": {
+    "gulp-format-md": "^0.1.11",
     "mocha": "*",
     "should": "*"
   },
@@ -45,7 +46,6 @@
   ],
   "verb": {
     "related": {
-      "description": "",
       "list": [
         "get-value",
         "get-values",
@@ -55,6 +55,17 @@
         "union-value",
         "upsert-value"
       ]
+    },
+    "toc": false,
+    "layout": "default",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "lint": {
+      "reflinks": true
     }
   }
 }

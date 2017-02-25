@@ -1,13 +1,13 @@
-# unset-value [![NPM version](https://badge.fury.io/js/unset-value.svg)](http://badge.fury.io/js/unset-value)
+# unset-value [![NPM version](https://img.shields.io/npm/v/unset-value.svg?style=flat)](https://www.npmjs.com/package/unset-value) [![NPM monthly downloads](https://img.shields.io/npm/dm/unset-value.svg?style=flat)](https://npmjs.org/package/unset-value)  [![NPM total downloads](https://img.shields.io/npm/dt/unset-value.svg?style=flat)](https://npmjs.org/package/unset-value) [![Linux Build Status](https://img.shields.io/travis/jonschlinkert/unset-value.svg?style=flat&label=Travis)](https://travis-ci.org/jonschlinkert/unset-value)
 
 > Delete nested properties from an object using dot notation.
 
 ## Install
 
-Install with [npm](https://www.npmjs.com/)
+Install with [npm](https://www.npmjs.com/):
 
 ```sh
-$ npm i unset-value --save
+$ npm install --save unset-value
 ```
 
 ## Usage
@@ -73,40 +73,59 @@ unset();
 // 'expected an object.'
 ```
 
-## Related projects
+## About
 
-* [get-value](https://www.npmjs.com/package/get-value): Use property paths (`  a.b.c`) to get a nested value from an object. | [homepage](https://github.com/jonschlinkert/get-value)
-* [get-values](https://www.npmjs.com/package/get-values): Return an array of all values from the given object. | [homepage](https://github.com/jonschlinkert/get-values)
-* [omit-value](https://www.npmjs.com/package/omit-value): Omit properties from an object or deeply nested property of an object using object path… [more](https://www.npmjs.com/package/omit-value) | [homepage](https://github.com/jonschlinkert/omit-value)
-* [put-value](https://www.npmjs.com/package/put-value): Update only existing values from an object, works with dot notation paths like `  a.b.c` and… [more](https://www.npmjs.com/package/put-value) | [homepage](https://github.com/tunnckocore/put-value#readme)
-* [set-value](https://www.npmjs.com/package/set-value): Create nested values and any intermediaries using dot notation (`'a.b.c'`) paths. | [homepage](https://github.com/jonschlinkert/set-value)
-* [union-value](https://www.npmjs.com/package/union-value): Set an array of unique values as the property of an object. Supports setting deeply… [more](https://www.npmjs.com/package/union-value) | [homepage](https://github.com/jonschlinkert/union-value)
-* [upsert-value](https://www.npmjs.com/package/upsert-value): Update or set nested values and any intermediaries with dot notation (`'a.b.c'`) paths. | [homepage](https://github.com/doowb/upsert-value)
+### Related projects
 
-## Running tests
+* [get-value](https://www.npmjs.com/package/get-value): Use property paths (`a.b.c`) to get a nested value from an object. | [homepage](https://github.com/jonschlinkert/get-value "Use property paths (`a.b.c`) to get a nested value from an object.")
+* [get-values](https://www.npmjs.com/package/get-values): Return an array of all values from the given object. | [homepage](https://github.com/jonschlinkert/get-values "Return an array of all values from the given object.")
+* [omit-value](https://www.npmjs.com/package/omit-value): Omit properties from an object or deeply nested property of an object using object path… [more](https://github.com/jonschlinkert/omit-value) | [homepage](https://github.com/jonschlinkert/omit-value "Omit properties from an object or deeply nested property of an object using object path notation.")
+* [put-value](https://www.npmjs.com/package/put-value): Update only existing values from an object, works with dot notation paths like `a.b.c` and… [more](https://github.com/tunnckocore/put-value#readme) | [homepage](https://github.com/tunnckocore/put-value#readme "Update only existing values from an object, works with dot notation paths like `a.b.c` and support deep nesting.")
+* [set-value](https://www.npmjs.com/package/set-value): Create nested values and any intermediaries using dot notation (`'a.b.c'`) paths. | [homepage](https://github.com/jonschlinkert/set-value "Create nested values and any intermediaries using dot notation (`'a.b.c'`) paths.")
+* [union-value](https://www.npmjs.com/package/union-value): Set an array of unique values as the property of an object. Supports setting deeply… [more](https://github.com/jonschlinkert/union-value) | [homepage](https://github.com/jonschlinkert/union-value "Set an array of unique values as the property of an object. Supports setting deeply nested properties using using object-paths/dot notation.")
+* [upsert-value](https://www.npmjs.com/package/upsert-value): Update or set nested values and any intermediaries with dot notation (`'a.b.c'`) paths. | [homepage](https://github.com/doowb/upsert-value "Update or set nested values and any intermediaries with dot notation (`'a.b.c'`) paths.")
 
-Install dev dependencies:
+### Contributing
+
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](../../issues/new).
+
+### Contributors
+
+| **Commits** | **Contributor** | 
+| --- | --- |
+| 6 | [jonschlinkert](https://github.com/jonschlinkert) |
+| 2 | [wtgtybhertgeghgtwtg](https://github.com/wtgtybhertgeghgtwtg) |
+
+### Building docs
+
+_(This project's readme.md is generated by [verb](https://github.com/verbose/verb-generate-readme), please don't edit the readme directly. Any changes to the readme must be made in the [.verb.md](.verb.md) readme template.)_
+
+To generate the readme, run the following command:
 
 ```sh
-$ npm i -d && npm test
+$ npm install -g verbose/verb#dev verb-generate-readme && verb
 ```
 
-## Contributing
+### Running tests
 
-Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/jonschlinkert/unset-value/issues/new).
+Running and reviewing unit tests is a great way to get familiarized with a library and its API. You can install dependencies and run tests with the following command:
 
-## Author
+```sh
+$ npm install && npm test
+```
+
+### Author
 
 **Jon Schlinkert**
 
-+ [github/jonschlinkert](https://github.com/jonschlinkert)
-+ [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
+* [github/jonschlinkert](https://github.com/jonschlinkert)
+* [twitter/jonschlinkert](https://twitter.com/jonschlinkert)
 
-## License
+### License
 
-Copyright © 2015 Jon Schlinkert
-Released under the MIT license.
+Copyright © 2017, [Jon Schlinkert](https://github.com/jonschlinkert).
+Released under the [MIT License](LICENSE).
 
 ***
 
-_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on October 30, 2015._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.4.2, on February 25, 2017._
