@@ -1,7 +1,7 @@
 {
   "name": "unset-value",
   "description": "Delete nested properties from an object using dot notation.",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "homepage": "https://github.com/jonschlinkert/unset-value",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "contributors": [
