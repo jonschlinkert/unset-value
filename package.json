@@ -4,6 +4,10 @@
   "version": "0.1.1",
   "homepage": "https://github.com/jonschlinkert/unset-value",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "contributors": [
+    "<wtgtybhertgeghgtwtg@gmail.com> (https://github.com/wtgtybhertgeghgtwtg)",
+    "Jon Schlinkert <jon.schlinkert@sellside.com> (http://twitter.com/jonschlinkert)"
+  ],
   "repository": "jonschlinkert/unset-value",
   "bugs": {
     "url": "https://github.com/jonschlinkert/unset-value/issues"
@@ -27,6 +31,18 @@
     "mocha": "*",
     "should": "*"
   },
+  "keywords": [
+    "del",
+    "delete",
+    "key",
+    "object",
+    "omit",
+    "prop",
+    "property",
+    "remove",
+    "unset",
+    "value"
+  ],
   "verb": {
     "related": {
       "description": "",
@@ -40,17 +56,5 @@
         "upsert-value"
       ]
     }
-  },
-  "keywords": [
-    "del",
-    "delete",
-    "key",
-    "object",
-    "omit",
-    "prop",
-    "property",
-    "remove",
-    "unset",
-    "value"
-  ]
+  }
 }
