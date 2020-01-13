@@ -24,8 +24,9 @@
     "test": "mocha"
   },
   "dependencies": {
+    "get-value": "^3.0.1",
     "has-value": "^2.0.2",
-    "isobject": "^3.0.0"
+    "isobject": "^4.0.0"
   },
   "devDependencies": {
     "gulp-format-md": "^0.1.11",
