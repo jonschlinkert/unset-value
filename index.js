@@ -14,13 +14,16 @@ module.exports = function unset(obj, prop) {
   if (!isObject(obj)) {
     throw new TypeError('expected an object.');
   }
-  if (obj.hasOwnProperty(prop)) {
+
+  var isArray = Array.isArray(prop);
+
+  if (!isArray && obj.hasOwnProperty(prop)) {
     delete obj[prop];
     return true;
   }
 
   if (has(obj, prop)) {
-    var segs = prop.split('.');
+    var segs = isArray ? prop.slice() : prop.split('.');
     var last = segs.pop();
     while (segs.length && segs[segs.length - 1].slice(-1) === '\\') {
       last = segs.pop().slice(0, -1) + '.' + last;
