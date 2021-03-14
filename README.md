@@ -15,7 +15,7 @@ $ npm install --save unset-value
 
 ```js
 var unset = require('unset-value');
-unset(obj, path);
+unset(obj, prop);
 ```
 
 ### Params
