@@ -122,4 +122,11 @@ describe('input path as array paths', function () {
       unset();
     }).should.throw('expected an object.');
   });
+
+  it('should not allow unsetting unsafe values', () => {
+    assert.throws(() => unset({}, '__proto__.toString'));
+    assert.throws(() => unset(()=>{}, 'prototype'));
+    assert.throws(() => unset(()=>{}, 'contructor'));
+  });
+
 });

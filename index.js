@@ -10,6 +10,16 @@
 var isObject = require('isobject');
 var has = require('has-value');
 
+const isUnsafeKey = key => {
+  return key === '__proto__' || key === 'constructor' || key === 'prototype';
+};
+
+const validateKey = key => {
+  if (isUnsafeKey(key)) {
+    throw new Error(`Cannot set unsafe key: "${key}"`);
+  }
+};
+
 module.exports = function unset(obj, prop) {
   if (!isObject(obj)) {
     throw new TypeError('expected an object.');
@@ -28,7 +38,11 @@ module.exports = function unset(obj, prop) {
     while (segs.length && segs[segs.length - 1].slice(-1) === '\\') {
       last = segs.pop().slice(0, -1) + '.' + last;
     }
-    while (segs.length) obj = obj[prop = segs.shift()];
+    while (segs.length) {
+      prop = segs.shift();
+      validateKey(prop);
+      obj = obj[prop];
+    }
     return (delete obj[last]);
   }
   return true;
