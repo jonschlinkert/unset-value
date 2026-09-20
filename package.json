@@ -26,7 +26,6 @@
     "test": "mocha"
   },
   "dependencies": {
-    "has-value": "^2.0.2",
     "isobject": "^4.0.0"
   },
   "devDependencies": {

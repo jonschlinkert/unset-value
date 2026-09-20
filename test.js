@@ -130,3 +130,37 @@ describe('input path as array paths', function () {
   });
 
 });
+
+describe('empty / falsy own properties (issue #3)', function () {
+  it('should unset nested empty arrays', function () {
+    var data = {
+      a: 'a',
+      b: {
+        b: [],
+        bb: 1
+      },
+      c: []
+    };
+
+    unset(data, 'b.b').should.eql(true);
+    data.should.eql({ a: 'a', b: { bb: 1 }, c: [] });
+
+    unset(data, 'b.bb').should.eql(true);
+    data.should.eql({ a: 'a', b: {}, c: [] });
+
+    unset(data, 'c').should.eql(true);
+    data.should.eql({ a: 'a', b: {} });
+  });
+
+  it('should unset nested empty strings', function () {
+    var data = { a: { b: '' } };
+    unset(data, 'a.b').should.eql(true);
+    data.should.eql({ a: {} });
+  });
+
+  it('should unset nested undefined own properties', function () {
+    var data = { a: { b: undefined } };
+    unset(data, 'a.b').should.eql(true);
+    data.should.eql({ a: {} });
+  });
+});
