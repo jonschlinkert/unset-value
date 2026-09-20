@@ -68,6 +68,71 @@ describe('unset', function () {
   });
 });
 
+describe('escaped dots in nested paths (issue #7)', function () {
+  it('should unset a property after an escaped-dot key:', function () {
+    var obj = {a: {'b.c': {d: 1, e: 2}}};
+    unset(obj, 'a.b\\.c.d');
+    obj.should.eql({a: {'b.c': {e: 2}}});
+  });
+
+  it('should unset after a leading escaped-dot key:', function () {
+    var obj = {'a.b': {c: 1, d: 2}};
+    unset(obj, 'a\\.b.c');
+    obj.should.eql({'a.b': {d: 2}});
+  });
+
+  it('should unset after multiple escaped dots:', function () {
+    var obj = {a: {'b.c.d': {e: 1, f: 2}}};
+    unset(obj, 'a.b\\.c\\.d.e');
+    obj.should.eql({a: {'b.c.d': {f: 2}}});
+  });
+
+  it('should unset an array index after an escaped-dot key:', function () {
+    var obj = {a: {'b.c': {arr: ['x', 'y', 'z']}}};
+    unset(obj, 'a.b\\.c.arr.1');
+    assert.equal(Object.prototype.hasOwnProperty.call(obj.a['b.c'].arr, '1'), false);
+    obj.a['b.c'].arr[0].should.equal('x');
+    obj.a['b.c'].arr[2].should.equal('z');
+  });
+
+  it('should unset a nested property at an array index after an escaped-dot key:', function () {
+    var obj = {a: {'b.c': {arr: [{d: 1}, {d: 2}, {d: 3}]}}};
+    unset(obj, 'a.b\\.c.arr.2.d');
+    obj.should.eql({a: {'b.c': {arr: [{d: 1}, {d: 2}, {}]}}});
+  });
+
+  it('should not unset the unescaped sibling path (issue #7 fixture):', function () {
+    var deep = {
+      a: {
+        'b.c': {
+          arr: [
+            {d: {e: {arr: [{f: true}, {f: true}]}}, x: false},
+            {d: {e: {arr: [{f: false}, {f: false}]}}},
+            {d: {e: {arr: [{f: false}, {f: false}]}}}
+          ]
+        },
+        b: {
+          c: {
+            arr: [
+              {d: {e: {arr: [{f: true}, {f: true}]}}, x: true},
+              {d: {e: {arr: [{f: false}, {f: false}]}}},
+              {d: {e: {arr: [{f: false}, {f: false}]}}}
+            ]
+          }
+        }
+      }
+    };
+
+    var sibling = deep.a.b.c.arr[2];
+    unset(deep, 'a.b\\.c.arr.2');
+
+    assert.equal(Object.prototype.hasOwnProperty.call(deep.a['b.c'].arr, '2'), false);
+    deep.a['b.c'].arr[0].x.should.equal(false);
+    deep.a.b.c.arr[2].should.equal(sibling);
+    deep.a.b.c.arr[2].d.e.arr.should.eql([{f: false}, {f: false}]);
+  });
+});
+
 describe('input path as array paths', function () {
   it('should update the given object when a property is deleted:', function () {
     var obj = {a: 'b'};

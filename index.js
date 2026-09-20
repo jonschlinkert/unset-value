@@ -40,6 +40,9 @@ module.exports = function unset(obj, prop) {
     }
     while (segs.length) {
       prop = segs.shift();
+      while (prop && prop.slice(-1) === '\\' && segs.length) {
+        prop = prop.slice(0, -1) + '.' + segs.shift();
+      }
       validateKey(prop);
       obj = obj[prop];
     }
