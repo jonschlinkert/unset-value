@@ -157,3 +157,18 @@ describe('nested empty values', function () {
     assert.deepStrictEqual(obj, {});
   });
 });
+
+
+describe('unsafe intermediate paths', function () {
+  ['a.__proto__.toString', 'a.constructor.prototype.toString', 'a.prototype.value'].forEach(function (path) {
+    it('should reject ' + path + ' without changing prototypes', function () {
+      var originalToString = Object.prototype.toString;
+      var originalConstructor = Object.prototype.constructor;
+      var obj = {a: {prototype: {value: 'keep'}}};
+      assert.throws(function () { unset(obj, path); }, /Cannot set unsafe key/);
+      assert.strictEqual(Object.prototype.toString, originalToString);
+      assert.strictEqual(Object.prototype.constructor, originalConstructor);
+      assert.deepStrictEqual(obj, {a: {prototype: {value: 'keep'}}});
+    });
+  });
+});
