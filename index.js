@@ -32,6 +32,7 @@ module.exports = function unset(obj, prop) {
   }
 
   var segs = isArray ? prop.slice() : prop.split('.');
+  if (segs.length === 0) return true;
   var last = segs.pop();
   while (segs.length && segs[segs.length - 1].slice(-1) === '\\') {
     last = segs.pop().slice(0, -1) + '.' + last;
@@ -42,5 +43,6 @@ module.exports = function unset(obj, prop) {
     validateKey(prop);
     obj = obj[prop];
   }
-  return obj == null ? true : (delete obj[last]);
+  if (obj == null || (typeof obj !== 'object' && typeof obj !== 'function')) return true;
+  return (delete obj[last]);
 };

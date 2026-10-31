@@ -172,3 +172,52 @@ describe('unsafe intermediate paths', function () {
     });
   });
 });
+
+
+describe('path traversal compatibility', function () {
+  [['abc', 'a.0'], ['abc', ['a', '0']], ['', 'a.length'], ['abc', 'a.length']].forEach(function (example) {
+    it('should leave a primitive parent unchanged for ' + JSON.stringify(example[1]), function () {
+      var obj = {a: example[0]};
+      assert.strictEqual(unset(obj, example[1]), true);
+      assert.deepStrictEqual(obj, {a: example[0]});
+    });
+  });
+
+  it('should leave a literal undefined key unchanged for an empty path array', function () {
+    var obj = {undefined: 'keep'};
+    assert.strictEqual(unset(obj, []), true);
+    assert.deepStrictEqual(obj, {undefined: 'keep'});
+  });
+
+  ['a.0', ['a', '0']].forEach(function (path) {
+    it('should still delete an index from an array parent using ' + JSON.stringify(path), function () {
+      var obj = {a: ['remove', 'keep']};
+      assert.strictEqual(unset(obj, path), true);
+      assert.strictEqual(Object.prototype.hasOwnProperty.call(obj.a, '0'), false);
+      assert.strictEqual(obj.a.length, 2);
+      assert.strictEqual(obj.a[1], 'keep');
+    });
+  });
+
+  ['0', 'length'].forEach(function (key) {
+    it('should still delete an object property named ' + key, function () {
+      var obj = {a: {0: 'remove', length: 'remove', keep: true}};
+      assert.strictEqual(unset(obj, ['a', key]), true);
+      assert.strictEqual(Object.prototype.hasOwnProperty.call(obj.a, key), false);
+      assert.strictEqual(obj.a.keep, true);
+    });
+  });
+
+  it('should still delete properties from a function parent', function () {
+    var fn = function () {};
+    fn.value = 'remove';
+    assert.strictEqual(unset({a: fn}, 'a.value'), true);
+    assert.strictEqual(Object.prototype.hasOwnProperty.call(fn, 'value'), false);
+  });
+
+  it('should still delete an explicitly named undefined key', function () {
+    var obj = {undefined: 'remove'};
+    assert.strictEqual(unset(obj, ['undefined']), true);
+    assert.deepStrictEqual(obj, {});
+  });
+});
