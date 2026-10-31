@@ -130,3 +130,30 @@ describe('input path as array paths', function () {
   });
 
 });
+
+
+describe('nested empty values', function () {
+  [[], {}, '', undefined, null, false, 0, 'value'].forEach(function (value) {
+    ['a.b', ['a', 'b']].forEach(function (path) {
+      it('should delete ' + String(value) + ' using ' + JSON.stringify(path), function () {
+        var obj = {a: {b: value, keep: true}};
+        assert.strictEqual(unset(obj, path), true);
+        assert.deepStrictEqual(obj, {a: {keep: true}});
+      });
+    });
+  });
+
+  [null, undefined, false, 0, 'text'].forEach(function (value) {
+    it('should leave a non-object intermediate value unchanged', function () {
+      var obj = {a: value};
+      assert.strictEqual(unset(obj, 'a.b.c'), true);
+      assert.deepStrictEqual(obj, {a: value});
+    });
+  });
+
+  it('should not create missing intermediate properties', function () {
+    var obj = {};
+    assert.strictEqual(unset(obj, 'a.b.c'), true);
+    assert.deepStrictEqual(obj, {});
+  });
+});
