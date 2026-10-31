@@ -8,7 +8,6 @@
 'use strict';
 
 var isObject = require('isobject');
-var has = require('has-value');
 
 const isUnsafeKey = key => {
   return key === '__proto__' || key === 'constructor' || key === 'prototype';
@@ -32,18 +31,18 @@ module.exports = function unset(obj, prop) {
     return true;
   }
 
-  if (has(obj, prop)) {
-    var segs = isArray ? prop.slice() : prop.split('.');
-    var last = segs.pop();
-    while (segs.length && segs[segs.length - 1].slice(-1) === '\\') {
-      last = segs.pop().slice(0, -1) + '.' + last;
-    }
-    while (segs.length) {
-      prop = segs.shift();
-      validateKey(prop);
-      obj = obj[prop];
-    }
-    return (delete obj[last]);
+  var segs = isArray ? prop.slice() : prop.split('.');
+  if (segs.length === 0) return true;
+  var last = segs.pop();
+  while (segs.length && segs[segs.length - 1].slice(-1) === '\\') {
+    last = segs.pop().slice(0, -1) + '.' + last;
   }
-  return true;
+  while (segs.length) {
+    prop = segs.shift();
+    if (obj == null) return true;
+    validateKey(prop);
+    obj = obj[prop];
+  }
+  if (obj == null || (typeof obj !== 'object' && typeof obj !== 'function')) return true;
+  return (delete obj[last]);
 };
